@@ -15,15 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from ingApp.views import index, CustomLoginView
 from django.contrib.auth import views as auth_views
-from ingApp.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/login/', auth_views.LoginView.as_view(), name='login'),  # Cambié aquí
-     path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
+    path('accounts/login/', CustomLoginView.as_view(), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
     path('', index, name='index'),
 ]
-
 
     
