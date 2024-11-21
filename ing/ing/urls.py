@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from ingApp.views import index, CustomLoginView
+from ingApp.views import index, CustomLoginView, matricula_view,lista_alumnos
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -23,6 +23,8 @@ urlpatterns = [
     path('accounts/login/', CustomLoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
     path('', index, name='index'),
+    path('matricula/', matricula_view, name='matricula'),
+    path('lista-alumnos/', lista_alumnos, name='lista_alumnos'),
 ]
 
     
