@@ -25,6 +25,7 @@ urlpatterns = [
     path('', index, name='index'),
     path('matricula/', matricula_view, name='matricula'),
     path('lista-alumnos/', lista_alumnos, name='lista_alumnos'),
+
 ]
 
     

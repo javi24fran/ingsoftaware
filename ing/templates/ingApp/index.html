@@ -13,6 +13,7 @@
     <div class="container">
         <div class="sidebar">
             <h2 id="list-title">Lista de Opciones</h2>
+            
             <ul>
                 <li>
                     <a href="{% url 'index' %}" class="menu-link {% if request.path == '/' %}active{% endif %}">
@@ -46,6 +47,7 @@
             <!-- Bloque dinámico -->
             {% block content %}
                 {% if section == 'matricula' %}
+                    <!-- Aquí se incluye el formulario de matrícula -->
                     {% include 'ingApp/formulario_matricula.html' %}
                 {% endif %}
             {% endblock content %}

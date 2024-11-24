@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
-from ingApp. models import Alumno
+from ingApp. models import Alumno, Apoderado
 
 class CustomAuthenticationForm(AuthenticationForm):
     error_messages = {
@@ -27,3 +27,8 @@ class AlumnoForm(forms.ModelForm):
         if not numero_emergencia.isdigit():
             raise forms.ValidationError('El número de emergencia debe contener solo números.')
         return numero_emergencia
+    
+class ApoderadoForm(forms.ModelForm):
+    class Meta:
+        model = Apoderado
+        fields = ['nombre', 'apellido', 'run', 'nacionalidad', 'oficio', 'domicilio', 'nivel_educacional']
