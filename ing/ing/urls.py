@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from ingApp.views import index, CustomLoginView, matricula_view,lista_alumnos
+from ingApp.views import index, CustomLoginView, matricula_view,lista_alumnos,detalle_alumno,eliminar_alumno
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -25,6 +25,8 @@ urlpatterns = [
     path('', index, name='index'),
     path('matricula/', matricula_view, name='matricula'),
     path('lista-alumnos/', lista_alumnos, name='lista_alumnos'),
+     path('alumnos/<int:alumno_id>/', detalle_alumno, name='detalle_alumno'),
+    path('alumnos/<int:alumno_id>/eliminar/', eliminar_alumno, name='eliminar_alumno'),
 
 ]
 

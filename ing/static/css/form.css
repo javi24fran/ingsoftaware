@@ -76,7 +76,7 @@ select {
 }
 
 select option:hover {
-    background-color: #40e417; 
+    background-color: #ff2003; 
 }
 
 select option:checked {
@@ -99,12 +99,12 @@ select option:checked {
 
 /* Botón de submit */
 .btn-submit {
-    background-color: #28a745; /* Verde */
+    background-color: #28a745; 
     color: #fff;
 }
 
 .btn-submit:hover {
-    background-color: #218838; /* Verde más oscuro */
+    background-color: #218838; 
     transform: translateY(-2px);
 }
 
@@ -115,13 +115,13 @@ select option:checked {
 
 /* Botón de volver */
 .btn-back {
-    background-color: #a0a0a0; /* Amarillo */
+    background-color: #a0a0a0; 
     color: #fff;
     margin-top: 10px;
 }
 
 .btn-back:hover {
-    background-color: #333; /* Amarillo más oscuro */
+    background-color: #333; 
     transform: translateY(-2px);
 }
 
@@ -132,13 +132,13 @@ select option:checked {
 
 /* Botón de inicio */
 .btn-home {
-    background-color: #007bff; /* Azul */
+    background-color: #007bff; 
     color: #fff;
     margin-top: 10px;
 }
 
 .btn-home:hover {
-    background-color: #0056b3; /* Azul más oscuro */
+    background-color: #0056b3;
     transform: translateY(-2px);
 }
 
@@ -147,7 +147,7 @@ select option:checked {
     transform: translateY(1px);
 }
 
-/* Estilo para el mensaje de éxito */
+/* mensaje de éxito matricula */
 .success-message {
     padding: 20px;
     text-align: center;
@@ -167,3 +167,13 @@ select option:checked {
     margin: 10px 15px;
 }
 
+
+.custom-icon {
+    font-size: 510px; 
+}
+
+.error-message {
+    color: red !important;
+    font-size: 1.1rem !important;
+    margin-top: 5px !important;
+}

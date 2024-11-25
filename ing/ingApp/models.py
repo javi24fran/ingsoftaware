@@ -78,7 +78,20 @@ class Apoderado(models.Model):
     nacionalidad = models.CharField(max_length=50)
     oficio = models.CharField(max_length=100)
     domicilio = models.CharField(max_length=200)
-    nivel_educacional = models.CharField(max_length=50)
+
+    NIVEL_CHOICES = [
+    ('Preescolar', 'Preescolar'),
+    ('ed_basica', 'Educación Básica'),
+    ('ed_media', 'Educación Media'),
+    ('ed_superior', 'Educación Superior'),
+    ('Ninguno', 'Ninguno'),
+    
+    ]
+    nivel_educacional = models.CharField(
+        max_length=20, 
+        choices=NIVEL_CHOICES, 
+        default='Ninguno'
+    )
 
     def __str__(self):
         return f"{self.nombre} {self.apellido}"

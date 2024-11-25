@@ -1,10 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404,redirect
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from .forms import CustomAuthenticationForm
 from ingApp.forms import AlumnoForm, ApoderadoForm
 from ingApp.models import Alumno, Apoderado
 from django.db import transaction
+from django.db.models import Q
 
 @login_required
 def index(request):
@@ -25,9 +27,9 @@ def matricula_view(request):
             return render(request, 'ingApp/index.html', {
                 'section': 'matricula',
                 'alumno_form': alumno_form,
-                'apoderado_form': ApoderadoForm(),  # Inicializamos el formulario de apoderado vacío
-                'show_apoderado_form': True,  # Mostrar formulario de apoderado
-                'show_alumno_form': False,    # Ocultar formulario de alumno
+                'apoderado_form': ApoderadoForm(),  
+                'show_apoderado_form': True, 
+                'show_alumno_form': False,  
             })
         else:
             # Si el formulario de alumno no es válido
@@ -35,8 +37,8 @@ def matricula_view(request):
                 'section': 'matricula',
                 'alumno_form': alumno_form,
                 'apoderado_form': apoderado_form,
-                'show_apoderado_form': False,  # No mostrar formulario de apoderado
-                'show_alumno_form': True,     # Mostrar formulario de alumno (no válido)
+                'show_apoderado_form': False, 
+                'show_alumno_form': True,     
             })
 
     # Si el formulario de apoderado fue enviado
@@ -55,44 +57,74 @@ def matricula_view(request):
                 apoderado.alumno = alumno  # Asociamos el apoderado con el alumno
                 apoderado.save()
 
-                # Ahora asociamos el apoderado con el alumno en la relación inversa
+                #asociar el apoderado con el alumno en la relación inversa
                 alumno.apoderado = apoderado
                 alumno.save()
 
-                # Borrar los datos de la sesión después de registrarlos
+
                 del request.session['alumno_data']
 
-            # Redirigir a la página de éxito
+
             return render(request, 'ingApp/index.html', {
                 'section': 'matricula',
                 'apoderado_form': apoderado_form,
                 'show_apoderado_form': False,
                 'show_alumno_form': False,
-                'registro_exitoso': True,  # Indicador de registro exitoso
+                'registro_exitoso': True,  
             })
         else:
-            # Si el formulario de apoderado no es válido, se vuelve a mostrar con los errores
+
             return render(request, 'ingApp/index.html', {
                 'section': 'matricula',
                 'alumno_form': alumno_form,
                 'apoderado_form': apoderado_form,
-                'show_apoderado_form': True,  # Mostrar formulario de apoderado
-                'show_alumno_form': False,    # Ocultar formulario de alumno
+                'show_apoderado_form': True, 
+                'show_alumno_form': False,    
             })
 
     return render(request, 'ingApp/index.html', {
         'section': 'matricula',
         'alumno_form': alumno_form,
         'apoderado_form': apoderado_form,
-        'show_apoderado_form': False,  # No mostrar formulario de apoderado
-        'show_alumno_form': True,     # Mostrar formulario de alumno
+        'show_apoderado_form': False,  
+        'show_alumno_form': True,     
     })
+
 
 @login_required
 def lista_alumnos(request):
-    alumnos = Alumno.objects.all()  # Obtener todos los alumnos
-    return render(request, 'ingApp/lista_alumnos.html', {'alumnos': alumnos})
+    # Obtener el término de búsqueda de la solicitud GET
+    query = request.GET.get('search', '').strip()  # Elimina espacios al inicio y final
+    if query:
+        # Filtrar alumnos por nombre o apellido (contiene, no sensible a mayúsculas)
+        alumnos = Alumno.objects.filter(
+            Q(nombre__icontains=query) | Q(apellido__icontains=query)
+        )
+    else:
+        # Si no hay búsqueda, mostrar todos los alumnos
+        alumnos = Alumno.objects.all()
+
+    # Pasar los resultados y el término de búsqueda a la plantilla
+    return render(request, 'ingApp/lista_alumnos.html', {
+        'alumnos': alumnos,
+        'search': query  # Para mostrar el término en el campo de búsqueda
+    })
 
 class CustomLoginView(LoginView):
     template_name = 'registration/login.html'
     authentication_form = CustomAuthenticationForm
+
+@login_required
+def detalle_alumno(request, alumno_id):
+    
+    alumno = get_object_or_404(Alumno, pk=alumno_id)
+    return render(request, 'ingApp/detalle-alumno.html', {
+        'alumno': alumno
+    })
+
+@login_required
+def eliminar_alumno(request, alumno_id):
+    alumno = get_object_or_404(Alumno, pk=alumno_id)  # Obtén el alumno a eliminar
+    alumno.delete()  # Elimina el alumno de la base de datos
+    messages.success(request, 'El alumno ha sido eliminado exitosamente.')
+    return redirect('lista_alumnos')  # Redirige a la lista de alumnos

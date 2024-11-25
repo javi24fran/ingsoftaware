@@ -109,3 +109,83 @@ body {
     height: auto;  
 }
 
+/* Contenedor de las tarjetas */
+.tarjetas-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin: auto;
+    padding-top: 50px;
+}
+
+/* Estilo común para cada tarjeta */
+.tarjeta {
+    width: 250px;
+    height: 350px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    position: relative;
+    color: #fff;
+}
+
+/* Estilo específico para cada tarjeta */
+.tarjeta-1 {
+    cursor: pointer;
+    background: linear-gradient(to bottom, #200769, #7a3d9f)
+}
+.tarjeta-1:hover {
+    transform: translateY(-5px);
+}
+
+
+
+
+.tarjeta-3 {
+    cursor: pointer;
+    background: linear-gradient(to bottom right, #200769, #8e2c8f);
+
+
+}
+.tarjeta-3:hover {
+    transform: translateY(-5px);
+}
+
+.tarjeta-4 {
+    cursor: pointer;
+    background: linear-gradient(45deg, #200769, #682c91);
+
+}
+.tarjeta-4:hover {
+    transform: translateY(-5px);
+}
+
+/* Área de texto sobre el fondo */
+.tarjeta .texto {
+    padding: 20px;
+    height: 70%;
+    display: flex;
+    text-align: left;
+}
+
+/* Estilo para los títulos dentro de las tarjetas */
+.tarjeta .texto h2 {
+    margin: 0;
+    font-size: 30px;
+}
+
+/* Estilo para los párrafos dentro de las tarjetas */
+.tarjeta .texto p {
+    font-size: 14px;
+    margin-top: 10px;
+    
+}
+
+/* Sección inferior para la información adicional */
+.tarjeta .info {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    font-size: 12px;
+}
