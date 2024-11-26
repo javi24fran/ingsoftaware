@@ -12,11 +12,12 @@ from django.core.exceptions import ValidationError
 class AlumnoForm(forms.ModelForm):
     class Meta:
         model = Alumno
-        fields = ['nombre', 'apellido', 'fecha_nacimiento', 'etnia', 'numero_emergencia', 'colegio_procedencia', 'beneficio_junaeb', 'sistema_salud']
+        fields = ['nombre', 'apellido', 'run','fecha_nacimiento', 'etnia', 'numero_emergencia', 'colegio_procedencia', 'beneficio_junaeb', 'sistema_salud']
         widgets = {
             'fecha_nacimiento': forms.DateInput(attrs={'type': 'date', 'class': 'form-control', 'placeholder': 'Ingrese Fecha Nacimiento'}),
             'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese Nombre'}),
             'apellido': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese Apellido'}),
+            'run': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese RUN'}),
             'numero_emergencia': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese número de emergencia'}),
             'colegio_procedencia': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese nombre Colegio de Procedencia'}),
             'etnia': forms.Select(attrs={'class': 'form-control'}),

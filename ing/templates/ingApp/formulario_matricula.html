@@ -35,6 +35,18 @@
                 {% endif %}
             </div>
 
+            <div class="input-run">
+                <label for="{{ alumno_form.run.id_for_label }}">Run</label>
+                {{ alumno_form.run }}
+                {% if alumno_form.run.errors %}
+                    <div class="error-message">
+                        {% for error in alumno_form.run.errors %}
+                            <p class="error-message">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
             <div class="input-fecha-nacimiento">
                 <label for="{{ alumno_form.fecha_nacimiento.id_for_label }}">Fecha de Nacimiento</label>
                 {{ alumno_form.fecha_nacimiento }}

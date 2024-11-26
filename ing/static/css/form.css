@@ -11,7 +11,7 @@
 }
 
 /* Estilo general para cada input y select */
-.input-nombre, .input-apellido, .input-fecha-nacimiento, .input-etnia,
+.input-nombre, .input-apellido, .input-run, .input-fecha-nacimiento, .input-etnia,
 .input-numero-emergencia, .input-colegio-procedencia, .input-beneficio-junaeb,
 .input-sistema-salud, .input-run, .input-nacionalidad, .input-oficio,
 .input-domicilio, .input-nivel-educacional {
@@ -30,7 +30,7 @@ input[type="text"], input[type="date"], select, .input-nombre label, .input-apel
 }
 
 /* Estilo para los inputs y selects */
-input[type="text"], input[type="date"], select, .input-nombre input, .input-apellido input, 
+input[type="text"], input[type="date"], select, .input-nombre input, .input-apellido input,
 .input-fecha-nacimiento input, .input-etnia input, .input-numero-emergencia input, 
 .input-colegio-procedencia input, .input-beneficio-junaeb input, .input-sistema-salud input, 
 .input-run input, .input-nacionalidad input, .input-oficio input, .input-domicilio input, 
