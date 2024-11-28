@@ -123,6 +123,28 @@ def detalle_alumno(request, alumno_id):
     })
 
 @login_required
+def actualizar_alumno(request, alumno_id):
+    # Obtén el alumno o muestra un error 404 si no existe
+    alumno = get_object_or_404(Alumno, pk=alumno_id)
+
+    # Si el formulario es enviado (método POST), procesa los datos
+    if request.method == 'POST':
+        alumno_form = AlumnoForm(request.POST, instance=alumno)  # Prellena con el alumno existente
+
+        if alumno_form.is_valid():
+            alumno_form.save()  # Guarda los cambios
+            messages.success(request, 'Los datos del alumno se han actualizado exitosamente.')
+            return redirect('detalle_alumno', alumno_id=alumno.id)  # Redirige al detalle del alumno
+    else:
+        # Si no es POST, muestra el formulario con los datos actuales
+        alumno_form = AlumnoForm(instance=alumno)
+
+    return render(request, 'ingApp/actualizar_alumno.html', {
+        'alumno_form': alumno_form,
+        'alumno': alumno  # Pasamos el objeto alumno por si es necesario en el template
+    })
+
+@login_required
 def eliminar_alumno(request, alumno_id):
     alumno = get_object_or_404(Alumno, pk=alumno_id)  # Obtén el alumno a eliminar
     alumno.delete()  # Elimina el alumno de la base de datos
