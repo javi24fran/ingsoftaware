@@ -66,12 +66,6 @@ class Alumno(models.Model):
 
 
 class Apoderado(models.Model):
-    alumno = models.ForeignKey(
-        Alumno, 
-        on_delete=models.CASCADE, 
-        null=True,
-        related_name='apoderados'  
-    )
     
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)

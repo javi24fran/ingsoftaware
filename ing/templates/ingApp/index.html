@@ -44,19 +44,21 @@
                 {% if request.path == '/' %}
                 <br><br>
                     <div class="tarjetas-container">
+                        <a href="{% url 'matricula' %}" class=" tarjeta-link">
                         <div class="tarjeta tarjeta-1">
                             <div class="color-top">
                                 <h2>Nueva <br>
                                     Matricula</h2>
-                                <a href="{% url 'matricula' %}" class="btn btn-submit">Registrar</a>
+                                
                             </div>
                             <div class="color-bottom">
                                 <p>Registra una matricula.</p>
                             
                             </div>
                         </div>
-
-
+                        </a>
+                        
+                        <a href="{% url 'lista_alumnos' %}" class="tarjeta-link">
                         <div class="tarjeta tarjeta-2">
                             <div class="color-top">
                                 <h2>Editar
@@ -67,7 +69,9 @@
                                 <p>Modifica una matricula.</p>
                             </div>
                         </div>
+                    </a>
 
+                    <a href="{% url 'lista_alumnos' %}" class="tarjeta-link">
                         <div class="tarjeta tarjeta-3">
                             <div class="color-top">
                                 <h2>Consultar Matricula</h2>
@@ -77,6 +81,7 @@
                             </div>
                         </div>
                     </div>
+                </a>
                 {% endif %}
 
                 {% if section == 'matricula' %}

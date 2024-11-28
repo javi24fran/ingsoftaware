@@ -124,30 +124,48 @@ def detalle_alumno(request, alumno_id):
 
 @login_required
 def actualizar_alumno(request, alumno_id):
-    # Obtén el alumno o muestra un error 404 si no existe
     alumno = get_object_or_404(Alumno, pk=alumno_id)
-    apoderado = get_object_or_404(Apoderado, pk= alumno_id)
-
-    # Si el formulario es enviado (método POST), procesa los datos
     if request.method == 'POST':
-        alumno_form = AlumnoForm(request.POST, instance=alumno)  # Prellena con el alumno existente
-        apoderado_form = ApoderadoForm(request.POST, instance=apoderado)
+        alumno_form = AlumnoForm(request.POST, instance=alumno)
         if alumno_form.is_valid():
-            alumno_form.save()  # Guarda los cambios
-            apoderado_form.save()
-            messages.success(request, 'Los datos del alumno se han actualizado exitosamente.')
-            return redirect('detalle_alumno', alumno_id=alumno.id)  # Redirige al detalle del alumno
+            alumno_form.save()
+            messages.success(request, 'Los datos del alumno se han actualizado correctamente.')
+            # Redirigir al formulario de apoderado
+            return redirect('actualizar_apoderado', alumno_id=alumno.id)
+        else:
+            messages.error(request, 'Por favor corrige los errores en el formulario del alumno.')
     else:
-        # Si no es POST, muestra el formulario con los datos actuales
         alumno_form = AlumnoForm(instance=alumno)
+    
+    return render(request, 'ingApp/actualizar_alumno.html', {
+        'alumno_form': alumno_form,
+        'alumno': alumno,
+    })
+
+@login_required
+def actualizar_apoderado(request, alumno_id):
+    alumno = get_object_or_404(Alumno, pk=alumno_id)
+    apoderado = alumno.apoderado if alumno.apoderado else Apoderado()
+
+    if request.method == 'POST':
+        apoderado_form = ApoderadoForm(request.POST, instance=apoderado)
+        if apoderado_form.is_valid():
+            apoderado = apoderado_form.save()
+            if not alumno.apoderado:
+                alumno.apoderado = apoderado
+                alumno.save()
+            messages.success(request, 'Los datos del apoderado se han actualizado correctamente.')
+            return redirect('detalle_alumno', alumno_id=alumno.id)
+        else:
+            messages.error(request, 'Por favor corrige los errores en el formulario del apoderado.')
+    else:
         apoderado_form = ApoderadoForm(instance=apoderado)
 
-    return render(request, 'ingApp/actualizar_alumno.html', {
-        'alumno_form': alumno_form, 'apoderado_form': apoderado_form,
-        'alumno': alumno  # Pasamos el objeto alumno por si es necesario en el template
-
-
+    return render(request, 'ingApp/actualizar_apoderado.html', {
+        'apoderado_form': apoderado_form,
+        'alumno': alumno,
     })
+
 
 @login_required
 def eliminar_alumno(request, alumno_id):

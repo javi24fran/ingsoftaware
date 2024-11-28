@@ -1,13 +1,11 @@
 {% extends 'ingApp/index.html' %}
 {% block content %}
 <div class="container">
-    <h2>Actualizar Datos del Alumno</h2>
+    <h2>Actualizar Datos del Apoderado</h2>
     <form method="post">
         {% csrf_token %}
-        {{ alumno_form.as_p }}
-        <button type="submit" class="btn btn-success">Siguiente</button>
+        {{ apoderado_form.as_p }}
+        <button type="submit" class="btn btn-success">Guardar Cambios</button>
     </form>
 </div>
 {% endblock %}
-
-
