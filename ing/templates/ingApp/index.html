@@ -12,7 +12,7 @@
 <body>
     <div class="container">
         <div class="sidebar">
-            <h2 id="list-title">Lista de Opciones</h2>
+            <h2 id="list-title">Menu</h2>
 
             <ul>
                 <li>
@@ -26,51 +26,50 @@
                     </a>
                 </li>
                 <li><a href="{% url 'lista_alumnos' %}" class="menu-link {% if request.path == '/lista-alumnos/' %}active{% endif %}"><i class="bi bi-list-ul" style="padding-right: 15px; color: #200769; font-size: 24px;"></i> Lista Alumnos</a></li>
-                <br><br><br><br><br><br><br><br><br><br><br>
+                <br><br><br><br><br><br><br><br><br>
+                <hr>
+                <br>
                 <li><a class="cerrar" href="{% url 'logout' %}" style="margin-top: 100px;"><i class="bi bi-power" style="padding-right: 15px; color: #200769; font-size: 24px;"></i> Cerrar sesión</a></li>
             </ul>
         </div>
 
         <div class="main-content">
             <nav class="nav-bar" style="background-color: white;">
-                <br>
-                <br>
             </nav>
-            <h1>Dashboard Liceo Bicentenario</h1>
-            <p>Plataforma diseñada para la gestión de matrículas del Liceo Bicentenario Frittis Mackey.</p>
+            <h1>LICEO BICENTENARIO MERCEDES FRITIS</h1>
             <hr>
 
             {% block content %}
                 {% if request.path == '/' %}
-                <h2>Inicio</h2>
+                <br><br>
                     <div class="tarjetas-container">
                         <div class="tarjeta tarjeta-1">
-                            <div class="texto">
+                            <div class="color-top">
                                 <h2>Nueva <br>
                                     Matricula</h2>
                             </div>
-                            <div class="info">
+                            <div class="color-bottom">
                                 <p>Registra una matricula.</p>
                             </div>
                         </div>
 
 
-                        <div class="tarjeta tarjeta-3">
-                            <div class="texto">
+                        <div class="tarjeta tarjeta-2">
+                            <div class="color-top">
                                 <h2>Editar
                                     <br>
                                      Matricula</h2>
                             </div>
-                            <div class="info">
+                            <div class="color-bottom">
                                 <p>Modifica una matricula.</p>
                             </div>
                         </div>
 
-                        <div class="tarjeta tarjeta-4">
-                            <div class="texto">
+                        <div class="tarjeta tarjeta-3">
+                            <div class="color-top">
                                 <h2>Consultar Matricula</h2>
                             </div>
-                            <div class="info">
+                            <div class="color-bottom">
                                 <p >Consulta lista de matriculas.</p>
                             </div>
                         </div>
