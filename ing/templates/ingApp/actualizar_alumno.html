@@ -6,6 +6,7 @@
     <form method="post">
         {% csrf_token %}
         {{ alumno_form.as_p }}
+        {{ apoderado_form.as_p }}
         <div class="form-group">
             <button type="submit" class="btn btn-success">Guardar Cambios</button>
             <a href="{% url 'detalle_alumno' alumno.id %}" class="btn btn-secondary">Cancelar</a>
