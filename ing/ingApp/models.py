@@ -51,22 +51,17 @@ class Alumno(models.Model):
     
 
     fecha_registro = models.DateTimeField(auto_now_add=True)
-
-
     apoderado = models.ForeignKey(
         'Apoderado', 
         on_delete=models.SET_NULL, 
         null=True, 
         blank=True,
-        related_name='alumnos'  
-    )
+        related_name='alumnos')
 
     def __str__(self):
         return f"{self.nombre} {self.apellido}"
 
-
 class Apoderado(models.Model):
-    
     nombre = models.CharField(max_length=100)
     apellido = models.CharField(max_length=100)
     run = models.CharField(max_length=12)
@@ -80,13 +75,11 @@ class Apoderado(models.Model):
     ('ed_media', 'Educación Media'),
     ('ed_superior', 'Educación Superior'),
     ('Ninguno', 'Ninguno'),
-    
     ]
     nivel_educacional = models.CharField(
         max_length=20, 
         choices=NIVEL_CHOICES, 
-        default='Ninguno'
-    )
+        default='Ninguno')
 
     def __str__(self):
         return f"{self.nombre} {self.apellido}"

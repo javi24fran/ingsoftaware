@@ -48,6 +48,24 @@ class AlumnoForm(forms.ModelForm):
         if any(char.isdigit() for char in apellido):
             raise forms.ValidationError('El apellido no puede contener números.')
         return apellido
+    
+    def clean_run(self):
+        run = self.cleaned_data.get('run')
+        
+        run_pattern = r'^\d{7,8}-[0-9kK]$'
+        
+        if not re.match(run_pattern, run):
+            raise forms.ValidationError('El RUN debe tener el formato: 12345678-9')
+
+        numero, digito = run.split('-')
+
+        if not numero.isdigit() or len(numero) < 7 or len(numero) > 8:
+            raise forms.ValidationError('El número del RUN debe tener entre 7 y 8 dígitos.')
+
+        if not (digito.isdigit() or digito.lower() == 'k'):
+            raise forms.ValidationError('El dígito verificador debe ser un número o la letra "K".')
+        
+        return run
 
     
 class ApoderadoForm(forms.ModelForm):
